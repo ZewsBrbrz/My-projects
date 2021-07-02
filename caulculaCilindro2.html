@@ -1,0 +1,89 @@
+<meta charset="UTF-8">
+	<canvas width="56" height="39.2"> </canvas>	
+
+	<br>Altura é de: <br>
+
+	<input type="text" name="input-1" id="h"> <br>
+	
+	Raio é de:(lembrando que diamentro é duas vezes o raio). <br>
+	<input type="text" name="input-2" id="R"> <br>
+
+	<input type="submit" onclick="calcula()">
+
+
+<script>
+//bandeira
+	var tela = document.querySelector('canvas');
+	var pincel = tela.getContext('2d');
+
+	pincel.fillStyle='green';
+	pincel.fillRect(0, 0, 56, 39.2);
+
+	pincel.fillStyle='yellow';
+	pincel.moveTo( 4.72, 19.60);
+	pincel.lineTo(   28,  4.72);
+	pincel.lineTo(51.28, 19.60);
+	pincel.lineTo(   28, 34.48);
+	pincel.lineTo( 4.72, 19.60);
+	pincel.fill();
+
+	pincel.fillStyle='blue';
+	pincel.beginPath();
+	pincel.arc(28, 19.6, 9.8, 0 , 2 * 3.14);
+	pincel.fill();
+
+
+function mostra(frase){
+	document.write(frase);
+	document.write("<br>")
+}
+
+function calcula(){
+
+	var altura = document.getElementById('h').value
+	var raio   = document.getElementById('R').value
+
+	altura = altura.replace(',' , '.');
+	raio   = raio.replace  (',' , '.');
+
+	var areaDaBase      = parseFloat(raio) ** 2
+	var areaDaBaseComPI = 3.14 * (parseFloat(raio) ** 2);
+	
+	var areaLateral      = 2 * parseFloat(raio) * parseFloat(altura);
+	var areaLateralComPI = 2 * 3.14 * parseFloat(raio) * parseFloat(altura);
+
+	var areaTotal      = (2 * areaDaBase)      + areaLateral;
+	var areaTotalComPI = (2 * areaDaBaseComPI) + areaLateralComPI;
+
+	var volume      = areaDaBase      * altura;
+	var volumeComPI = areaDaBaseComPI * altura;
+
+	var volumeDeMetroParaDecimentro     = volume      * 1000;
+	var volumeDeCentimetroParaDecimetro = volumeComPI / 1000;
+
+
+	mostra("Altura:" + altura);
+	mostra("Raio:"   +   raio);
+
+	mostra("Os calculos a segir levam em consideração o valor de π=3,14 <br>");
+
+	mostra("Área da Base");
+	mostra("O resultado é: " + Math.round(areaDaBase)  + "π <br> COM o valor de π <br> O resultado é: " + Math.round(areaDaBaseComPI)  + "<br>");
+	mostra("Área Lateral");
+	mostra("O resultado é: " + Math.round(areaLateral) + "π <br> COM o valor de π <br> O resultado é: " + Math.round(areaLateralComPI) + "<br>");
+	mostra("Área Total  ");
+	mostra("O resultado é: " + Math.round(areaTotal)   + "π <br> COM o valor de π <br> O resultado é: " + Math.round(areaTotalComPI)   + "<br>");
+	mostra("Volume      ");
+	mostra("O resultado é: " + Math.round(volume)      + "π <br> COM o valor de π <br> O resultado é: " + Math.round(volumeComPI)      + "<br>");	
+
+	mostra("O volume de metro cubico para decimetro cubico:"      + Math.round(volumeDeMetroParaDecimentro)          + "dm³");
+	mostra("O volume de centimetro cubico para decimetro cubico:" + Math.round(volumeDeCentimetroParaDecimetro) + "dm³");																																								
+}
+
+var focar = document.getElementById('h');
+focar.focus();
+
+
+
+
+</script>
