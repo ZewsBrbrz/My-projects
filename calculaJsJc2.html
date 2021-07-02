@@ -1,0 +1,134 @@
+<meta charset="UTF-8">
+<title>Calculadora</title>
+
+Informe o Capital:<br>
+<input type="text" name="input-2" id="capital"> <br>
+Informe a Taxa(%):<br>
+<input type="text" name="input-3" id="taxa"> <br>
+Informe o Tempo(em meses):<br>
+<input type="text" name="input-4" id="tempo"> <br>
+
+<button name="Juros-Composto" onclick="startJc()"> Juros Composto </button>
+<button name="Juros-Simples" onclick="startJs()"> Juros Simples </button>
+
+<script type="text/javascript">
+	
+	function mostra(frase){
+		document.write(frase);
+		document.write("<br>")
+	}
+	function escreva(cI,iI,iD,tI,J,JR,M,MR){
+		mostra("Capital: R$ "+cI+".");
+   		mostra("Taxa: "+iI+"%. <br> Taxa em decimal: "+iD+".");
+    	mostra("Tempo é de:"+tI);
+    	mostra("Juros é de: R$ "+J+". <br> Juros arrendondado: R$ "+JR);
+    	mostra("Montante é de: R$ "+M+". <br> Montante arrendondado: R$ "+MR);
+    	mostra("Dica rápida: O juro composto é dado pela formula: M= C.(1+i)^t");
+	}
+
+function startJc (){
+
+    var capitalInformado = document.getElementById('capital').value;
+    	capitalInformado=capitalInformado.replaceAll(",",".");
+    	capitalInformado=parseFloat(capitalInformado);
+
+    var taxaInformada = document.getElementById('taxa').value;
+    	taxaInformada=taxaInformada.replaceAll(",",".");
+    	taxaInformada=parseFloat(taxaInformada);
+
+    var tempoInformado = document.getElementById('tempo').value;
+    	tempoInformado=tempoInformado.replaceAll(",",".");
+    	tempoInformado=parseFloat(tempoInformado);
+    
+    var taxaDecimal = taxaInformada/100; 
+
+		while(isNaN(capitalInformado)){
+	            alert("ERROR404");
+	            var capitalInformado = parseFloat( prompt("Qual é o capital? "));
+	    }
+
+	       
+	    while(isNaN(taxaInformada)){
+	            alert("ERROR404");
+	            var taxaInformada = parseFloat( prompt("Qual é a taxa (%)"));
+	    }
+
+	      
+	    while(isNaN(tempoInformado)){
+	            alert("ERROR404");
+	            var tempoInformado = parseFloat( prompt("Qual é o tempo?"))
+	    }
+		
+			function calculaMontante(c, i, t){
+
+				var m = c*((1+i)**t);
+				return m;
+
+			}
+			function calculaJurosComposto(m, c){
+
+				var jc = m-c
+				return jc;
+			}
+
+		var resultadoFinal = parseFloat(calculaMontante(capitalInformado, taxaDecimal, tempoInformado));
+		var juro = parseFloat(calculaJurosComposto(resultadoFinal, capitalInformado));
+		var jurosRound = juro.toFixed(2);
+        var montanteRound = resultadoFinal.toFixed(2);
+
+        escreva(capitalInformado, taxaInformada, taxaDecimal, tempoInformado, juro, jurosRound, resultadoFinal, montanteRound);
+}
+function startJs(){
+
+    var capitalInformado = document.getElementById('capital').value;
+    	capitalInformado=capitalInformado.replaceAll(",",".");
+    	capitalInformado=parseFloat(capitalInformado);
+
+    var taxaInformada = document.getElementById('taxa').value;
+    	taxaInformada=taxaInformada.replaceAll(",",".");
+    	taxaInformada=parseFloat(taxaInformada);
+
+    var tempoInformado = document.getElementById('tempo').value;
+    	tempoInformado=tempoInformado.replaceAll(",",".");
+    	tempoInformado=parseFloat(tempoInformado);
+
+    var taxaDecimal = taxaInformada/100; 
+
+		while(isNaN(capitalInformado)){
+	            alert("ERROR404");
+	                    var capitalInformado = parseFloat( prompt("Qual é o capital? "));
+	    }
+
+	       
+	    while(isNaN(taxaInformada)){
+	            alert("ERROR404");
+	            var taxaInformada = parseFloat( prompt("Qual é a taxa (%)"));
+	    }
+
+	      
+	    while(isNaN(tempoInformado)){
+	            alert("ERROR404");
+	            var tempoInformado = parseFloat( prompt("Qual é o tempo?"))
+	    }
+
+			function calculaJurosSimples(c, i, t){
+
+	            return js = c*i*t;
+	        }
+			function montante(c, js){
+
+			    return resultadoFinal = c+(2*js-js);
+			}
+
+		var juro = parseFloat(calculaJurosSimples(capitalInformado, taxaDecimal, tempoInformado));
+        var resultadoFinal = parseFloat(montante(capitalInformado, juro))
+        var jurosRound = juro.toFixed(2);
+        var montanteRound = resultadoFinal.toFixed(2);
+
+	escreva(capitalInformado, taxaInformada, taxaDecimal, tempoInformado, juro, jurosRound, resultadoFinal, montanteRound);
+
+}
+
+var focar = document.getElementById('capital');
+focar.focus();
+</script>
